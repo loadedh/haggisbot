@@ -38,7 +38,7 @@ app.post('/hello', function(req, res, next) {
     }
 });
 
-app.post('/weatherLondon', function() {
+app.post('/weatherLondon', function(req, res, next) {
   const userName = req.body.user_name;
   const botPayLoad = {
     text: 'Hello ' + userName + ', the temperature for London is ' + weather
