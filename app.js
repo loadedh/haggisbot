@@ -37,7 +37,7 @@ app.post('/hello', function(req, res, next) {
     }
 });
 
-app.post('help', function(req, res, next) {
+app.post('/help', function(req, res, next) {
   const botPayLoad = {
     text: 'Weather - For the weather in your city type: "weather [your city]"' + '\n' + 'Hello - The bot will say hello to you, just type: "hello"'
   };
