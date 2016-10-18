@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const api = 'http://api.openweathermap.org/data/2.5/weather?', city = 'q=London', apiKey = 'APPID=fc2a5047efd117936135c68fe985dcf6&units=metric' ;
+const api = 'http://api.openweathermap.org/data/2.5/weather?', city = 'q=London&', apiKey = 'APPID=fc2a5047efd117936135c68fe985dcf6&units=metric' ;
 
 const app = express();
 const port = process.env.PORT || 1313;
