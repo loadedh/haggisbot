@@ -32,10 +32,10 @@ app.post('/hello', function(req, res, next) {
 app.post('/weather', function(req, res, next) {
   const userName = req.body.user_name;
   const messageText = req.body.text;
-  const getCity = messageText.match(/[^weather ]/gi);
-  const userWeather = `http://api.openweathermap.org/data/2.5/weather?q=${[...getCity].join('')}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+  const getCity = messageText.split('weather ');
+  const userWeather = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
   const botPayLoad = {
-    text: `Hello ${userName}, the weather for ${[...getCity].join('')} is ${userWeather}`
+    text: `Hello ${userName}, the weather for ${getCity[1]} is ${userWeather}`
     // text: 'Hello ' + userName + ', the weather for ' + userCity + ' is ' + userWeather.weather.clouds + ' : ' + userWeather.main.temp
   };
 
