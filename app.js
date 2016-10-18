@@ -1,10 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-let weather, apiKey = 'APPID=fc2a5047efd117936135c68fe985dcf6';
+// let weather, apiKey = 'APPID=fc2a5047efd117936135c68fe985dcf6';
 const app = express();
 const port = process.env.PORT || 1313;
-
 
 app.use(bodyParser.urlencoded({
     extended: true
