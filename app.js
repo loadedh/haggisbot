@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// let weather, apiKey = 'APPID=fc2a5047efd117936135c68fe985dcf6';
+const api = 'http://api.openweathermap.org/data/2.5/weather?', city = 'q=London', apiKey = 'APPID=fc2a5047efd117936135c68fe985dcf6&units=metric' ;
+
 const app = express();
 const port = process.env.PORT || 1313;
 
@@ -30,15 +31,15 @@ app.post('/hello', function(req, res, next) {
     }
 });
 
-// app.post('/weatherLondon', function(req, res, next) {
-//   const userName = req.body.user_name;
-//   const botPayLoad = {
-//     text: 'Hello ' + userName + ', the temperature for London is ' + weather
-//   };
-//
-//   if (userName !== 'slackbot') {
-//     return res.status(200).json(botPayLoad);
-//   } else {
-//     return res.status(200).end();
-//   }
-// });
+app.post('/weather', function(req, res, next) {
+  const userName = req.body.user_name;
+  const botPayLoad = {
+    text: 'Hello ' + userName + ', the weather for London is ' + (api + city + apiKey)
+  };
+
+  if (userName !== 'slackbot') {
+    return res.status(200).json(botPayLoad);
+  } else {
+    return res.status(200).end();
+  }
+});
