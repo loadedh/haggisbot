@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(reg, res) {
-    res.status(200).send('The server is up!!');
+    res.status(200).send('App is live!!');
 });
 
 app.listen(port, function() {
