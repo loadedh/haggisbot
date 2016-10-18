@@ -33,9 +33,9 @@ app.post('/weather', function(req, res, next) {
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const getCity = messageText.split('weather ');
-  const userWeather = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+  const userWeather = fetch(`http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`);
   const botPayLoad = {
-    text: `Hello ${userName}, the weather for ${getCity[1]} is ${userWeather}`
+    text: `Hello ${userName}, the weather for ${getCity[1]} is: '\n' Temp = ${userWeather.main.temp}°C '\n' Weather = ${userWeather.weather.description}`
     // text: 'Hello ' + userName + ', the weather for ' + userCity + ' is ' + userWeather.weather.clouds + ' : ' + userWeather.main.temp
   };
 
