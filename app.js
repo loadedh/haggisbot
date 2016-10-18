@@ -2,12 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = process.env.PORT || 322;
+const port = process.env.PORT || 1313;
 
 app.use(bodyParser.urlencoded({
-    extend,
-    true
+    extended: true
 }));
+
 app.get('/', function(reg, res) {
     res.status(200).send('The server is up!!');
 });
