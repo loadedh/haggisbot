@@ -37,23 +37,12 @@ app.post('/hello', function(req, res, next) {
     }
 });
 
-app.post('/help', function(req, res, next) {
-  const botPayLoad = {
-    text: 'Weather - For the weather in your city type: "weather [your city]"' + '\n' + 'Hello - The bot will say hello to you, just type: "hello"'
-  };
-
-  if (userName !== 'slackbot') {
-    return res.status(200).json(botPayLoad);
-  } else {
-    return res.status(200).end();
-  }
-});
-
 app.post('/weather', function(req, res, next) {
   const userName = req.body.user_name;
-  const bodytext = req.body.text;
+  const messageText = req.body.text;
+  const getCity = messageText.match(/[^weather ]/gi);
   const botPayLoad = {
-    text: 'Hello ' + userName + ', the weather for London is ' + 'http://api.openweathermap.org/data/2.5/weather?q=london&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric'
+    text: 'Hello ' + userName + ', the weather for London is ' + 'http://api.openweathermap.org/data/2.5/weather?q='+ getCity +'&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric'
     // text: 'Hello ' + userName + ', the weather for ' + userCity + ' is ' + userWeather.weather.clouds + ' : ' + userWeather.main.temp
   };
 
