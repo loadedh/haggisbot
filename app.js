@@ -41,7 +41,7 @@ app.post('/weather', function(req, res, next) {
     });
 
     const botPayLoad = {
-      text: `Hello ${userName}, the weather for ${getCity[1]} is: \n ${getdata.main.temp}`
+      text: `Hello ${userName}, the weather for ${getCity[1]} is: \n ${getdata}`
     };
     // $(document).ready(function() {
     //         $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`, function(data) {
