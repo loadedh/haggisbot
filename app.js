@@ -34,15 +34,17 @@ app.post('/weather', function(req, res, next) {
     const messageText = req.body.text;
     const getCity = messageText.split('-weather ');
     const apiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
-    $.getJSON(apiResponse, function(data) {
-      const botPayLoad = {
-        text: `Hello ${userName}, the weather for ${getCity[1]} is: \n TEMP - ${data.main.temp} \n WEATHER - ${data.weather.description}`
-      };
-    });
+    let weather;
+    const getData = $.getJSON(apiResponse, function(data) {
+      weather = data;
+    })
+    const botPayLoad = {
+      text: `Hello ${userName}, here is the weather for ${getCity}: \n TEMP - ${weather.main.temp} \nWEATHER - ${weather.weather.description}`
+    };
 
     if (userName !== 'slackbot') {
         return res.status(200).json(botPayLoad);
     } else {
-        return res.status(200).end('Failed to retrieve data');
+        return res.status(200).end();
     }
 });
