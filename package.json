@@ -1,25 +1,17 @@
 {
-  "name": "haggisbot",
-  "version": "1.0.0",
-  "description": "does bot things",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "kieron hagg",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "request": "^2.75.0"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/loadedh/haggisbot.git"
-  },
-  "bugs": {
-    "url": "https://github.com/loadedh/haggisbot/issues"
-  },
-  "homepage": "https://github.com/loadedh/haggisbot#readme"
+    "name": "haggisbot",
+    "version": "1.0.0",
+    "description": "does bot things",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "kieron hagg",
+    "license": "MIT"
+    "dependencies": {
+        "express": "^4.x.x",
+        "body-parser": "^1.x.x",
+        "request": "2.56.x",
+        "jquery": "^3.x.x"
+    }
 }
