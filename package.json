@@ -1,17 +1,14 @@
 {
-    "name": "haggisbot",
-    "version": "1.0.0",
-    "description": "does bot things",
-    "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "kieron hagg",
-    "license": "MIT"
-    "dependencies": {
-        "express": "^4.x.x",
-        "body-parser": "^1.x.x",
-        "jquery": "^3.x.x",
-        "request": "2.56.x"
-    }
+  "name": "slack",
+  "version": "1.0.0",
+  "description": "does bot things",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "request": "^2.75.0"
+  },
+  "author": "Kieron Hagg",
+  "license": "MIT",
+  "homepage": "https://github.com/loadedh/haggisbot#readme"
 }
