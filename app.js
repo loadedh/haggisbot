@@ -34,16 +34,32 @@ app.post('/weather', function(req, res, next) {
     const messageText = req.body.text;
     const getCity = messageText.split('-weather ');
 
-    function Get(url) {
-        var Httpreq = new XMLHttpRequest();
+    function getJSON(url, callback) {
+        const Httpreq = new XMLHttpRequest();
         Httpreq.open("GET", url, false);
-        Httpreq.send(null);
-        return Httpreq.responseText;
-    }
-    const json_obj = JSON.parse(Get(`http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`))
-    const botPayLoad = {
-        text: `Hello ${userName}, the weather for ${getCity[1]} is: \n ${json_obj.main.temp}`
+        Httpreq.responseType = 'json';
+        Httpreq.onload = function() {
+          const status = Httpreq.status;
+          if (status == 200) {
+            callback(null, Httpreq.response);
+          } else {
+            callback(status)
+          }
+        }
+        Httpreq.send();
     };
+
+    const json_obj = getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`,
+    function(err, data) {
+      if (err != null) {
+        console.log('Something went wrong')
+      } else {
+        const botPayLoad = {
+            text: `Hello ${userName}, the weather for ${getCity[1]} is: \n TEMP - ${json_obj.main.temp} \n WEATHER - ${json_obj.weather.description}`
+        };
+      }
+    });
+    // const json_obj = JSON.parse(Get(`http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`))
 
     if (userName !== 'slackbot') {
         return res.status(200).json(botPayLoad);
