@@ -37,7 +37,7 @@ app.post('/weather', function(req, res, next) {
     const botPayLoad = $.getJSON(apiResponse, function(data) {
       text: `Hello ${userName}, the weather for ${getCity[1]} is: \n TEMP - ${data.main.temp} \n WEATHER - ${data.weather.description}`
     });
-    
+
 
     // function httpGetAsync(theUrl, callback) {
     //     const xmlHttp = new XMLHttpRequest();
@@ -60,7 +60,7 @@ app.post('/weather', function(req, res, next) {
 // const json_obj = JSON.parse(Get(`http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`))
 
 if (userName !== 'slackbot') {
-    return res.status(200).json(botPayLoad);
+    return res.status(200).json(botPayLoad.data);
 } else {
     return res.status(200).end();
 }
