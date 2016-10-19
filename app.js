@@ -34,12 +34,10 @@ app.post('/weather', function(req, res, next) {
     const messageText = req.body.text;
     const getCity = messageText.split('-weather ');
     const apiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+    $.getJSON(apiResponse, function(data) {});
     const botPayLoad = {
-        $.getJSON(apiResponse, function(data) {
-            text: `Hello ${userName}, the weather for ${getCity[1]} is: \n TEMP - ${data.main.temp} \n WEATHER - ${data.weather.description}`
-        })
+      text: `Hello ${userName}, the weather for ${getCity[1]} is: \n TEMP - ${data.main.temp} \n WEATHER - ${data.weather.description}`
     };
-
 
     // function httpGetAsync(theUrl, callback) {
     //     const xmlHttp = new XMLHttpRequest();
