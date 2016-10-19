@@ -35,7 +35,7 @@ app.post('/weather', function(req, res, next) {
     const getCity = messageText.split('weather ');
     const apiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
     const botPayLoad = http.get(apiResponse, (res) => {
-        const payload = {
+        return {
             text: `Hello ${userName}, here is the weather for ${getCity}:
            \nTEMP - ${data.main.temp}
            \nWEATHER - ${data.weather.description}
@@ -53,7 +53,7 @@ app.post('/weather', function(req, res, next) {
     // };
 
     if (userName !== 'slackbot') {
-        return res.status(200).json();
+        return res.status(200).json(botPayLoad);
     } else {
         return res.status(200).end();
     }
