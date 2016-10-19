@@ -37,9 +37,9 @@ app.post('/weather', function(req, res, next) {
     const botPayLoad = http.get(apiResponse, (res) => {
         return {
             text: `Hello ${userName}, here is the weather for ${getCity}:
-           \nTEMP - ${data.main.temp}
-           \nWEATHER - ${data.weather.description}
-           \nWIND SPEED - ${data.wind.speed}`
+           \nTEMP - ${res.main.temp}
+           \nWEATHER - ${res.weather.description}
+           \nWIND SPEED - ${res.wind.speed}`
         };
     });
 
