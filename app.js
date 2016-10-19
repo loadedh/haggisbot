@@ -39,10 +39,10 @@ app.post('/weather', function(req, res, next) {
         text: `Hello ${userName}, the weather for ${getCity[1]} is: \n TEMP - ${data.main.temp} \n WEATHER - ${data.weather.description}`
       };
     });
-    
+
     if (userName !== 'slackbot') {
         return res.status(200).json(botPayLoad);
     } else {
-        return res.status(200).end();
+        return res.status(200).end('Failed to retrieve data');
     }
 });
