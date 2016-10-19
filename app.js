@@ -35,7 +35,7 @@ app.post('/weather', function(req, res, next) {
     const getCity = messageText.split('-weather ');
     const apiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
 
-    const botPayLoad = function() {
+     function botPayLoad() {
         $.getJSON(apiResponse, function(data) {
            text: `Hello ${userName}, here is the weather for ${getCity}:
         \nTEMP - ${data.main.temp}
