@@ -1,0 +1,12 @@
+This is the haggisbot for slack channels.
+
+As of 19/10/16 this bot has two functions: 
+1. The first is to say hello to users who say hello to the bot 
+- To use type 'hello haggisbot' in a chatroom that haggisbot is looking at.
+
+2. Second is to tell the user the weather for a city of there choice
+-To use type 'weather yourcity' in a chatroom that haggisbot is looking at.
+
+
+
+  - Kieron Hagg
