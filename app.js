@@ -63,6 +63,5 @@ app.post('/weather', function(req, res, next) {
 
     });
 
-    const bwoii = getData();
-    return bwoii();
+    return getData;
 });
