@@ -47,9 +47,9 @@ app.post('/weather', function(req, res, next) {
             const data = JSON.parse(body);
             const botPayLoad = {
               text: `Hello ${userName}, here is the weather for ${getCity}:
-                    \nTEMP - ${data.main.temp}
-                    \nWEATHER - ${data.weather.description}
-                    \nWIND SPEED - ${data.wind.speed}`
+                    \nTEMP - ${data}
+                    \nWEATHER - ${data}
+                    \nWIND SPEED - ${data}`
                   };
 
             if (userName !== 'slackbot') {
