@@ -36,7 +36,7 @@ app.post('/weather', function(req, res, next) {
   const getCity = messageText.split('weather ');
   const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
 
-  http.get(urlApiResponse, (res) => {
+  const getData = http.get(urlApiResponse, (res) => {
     let body = '';
           // res.setEncoding('utf8');
           res.on('data', (chunk) => {
@@ -62,4 +62,7 @@ app.post('/weather', function(req, res, next) {
           });
 
     });
+
+    const bwoii = getData();
+    return bwoii();
 });
