@@ -38,7 +38,7 @@ app.post('/weather', function(req, res, next) {
   const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
 
   const options = {
-    url: urlApiResponse
+    uri: urlApiResponse
   };
   function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
