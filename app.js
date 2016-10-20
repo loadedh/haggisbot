@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
+const request = require('request');
 
 const app = express();
 const port = process.env.PORT || 1313;
@@ -36,31 +37,17 @@ app.post('/weather', function(req, res, next) {
   const getCity = messageText.split('weather ');
   const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
 
-  const getData = http.get(urlApiResponse, (res) => {
-    let body = '';
-          // res.setEncoding('utf8');
-          req.on('data', (chunk) => {
-            body += chunk;
-          });
+  function callback(error, responsem, body) {
+    if (!error && response.statusCode == 200) {
+      const info = JSON.parse(body);
+      const botPayLoad = {
+        text: `Hello ${userName}, here is the weather for ${getCity}:
+              \nTEMP - ${info.main.temp}
+              \nWEATHER - ${info.weather.description}
+              \nWIND SPEED - ${info.wind.speed}`
+            };
+          }
+        }
 
-          res.on('end', () => {
-            const data = JSON.parse(body);
-            const botPayLoad = {
-              text: `Hello ${userName}, here is the weather for ${getCity}:
-                    \nTEMP - ${data.main.temp}
-                    \nWEATHER - ${data.weather.description}
-                    \nWIND SPEED - ${data.wind.speed}`
-                  };
-
-            if (userName !== 'slackbot') {
-              return res.status(200).json(botPayLoad)
-            } else {
-              return res.status(200).end();
-            }
-          }).on('error', (e) => {
-            console.log('Got error: ' + e.message);
-          });
-
-    });
-    return getData;
+  request(callback);
 });
