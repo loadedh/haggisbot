@@ -34,15 +34,18 @@ app.post('/weather', function(req, res, next) {
     const userName = req.body.user_name;
     const messageText = req.body.text;
     const getCity = messageText.split('weather ');
-    const apiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
-    const getData = http.get(apiResponse, (res) => {
-            text: `Hello ${userName}, here is the weather for ${getCity}:
-          \nTEMP - ${res.main.temp}
-          \nWEATHER - ${res.weather.description}
-          \nWIND SPEED - ${res.wind.speed}`
+    const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+    const botPayLoad = http.get(urlApiResponse, (res) => {
+      res.setEncoding('utf8');
+        res.on('data', (chunk) {
+            return {
+                text: `Hello ${userName}, here is the weather for ${getCity}:
+        \nTEMP - ${chunk.main.temp}
+        \nWEATHER - ${chunk.weather.description}
+        \nWIND SPEED - ${chunk.wind.speed}`
+            };
         });
-
-    const botPayLoad = getData.write('data\n');
+    });
 
     if (userName !== 'slackbot') {
         return res.status(200).json(botPayLoad);
