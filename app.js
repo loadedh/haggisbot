@@ -36,10 +36,10 @@ app.post('/weather', function(req, res, next) {
   const messageText = req.body.text;
   const getCity = messageText.split('weather ');
   const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+
   const options = {
     url: urlApiResponse
   };
-
   function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
@@ -49,8 +49,7 @@ app.post('/weather', function(req, res, next) {
               \nWEATHER - ${info.weather.description}
               \nWIND SPEED - ${info.wind.speed}`
             };
-          }
         }
-
-  request(options, callback);
+    }
+  return res.status(200).json(request(options, callback));
 });
