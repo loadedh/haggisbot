@@ -38,8 +38,8 @@ app.post('/weather', function(req, res, next) {
 
   http.get(urlApiResponse, (res) => {
     let body = '';
-          // res.setEncoding('utf8');
-          res.on('data', (chunk) {
+          res.setEncoding('utf8');
+          res.on('data', (chunk) => {
             body += chunk;
           });
 
@@ -50,14 +50,14 @@ app.post('/weather', function(req, res, next) {
                     \nTEMP - ${data.main.temp}
                     \nWEATHER - ${data.weather.description}
                     \nWIND SPEED - ${data.wind.speed}`
-                  }
+                  };
 
             if (userName !== 'slackbot') {
               return res.status(200).json(botPayLoad)
             } else {
               return res.status(200).end();
             }
-          })
+          });
 
     });
-}
+});
