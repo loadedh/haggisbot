@@ -40,7 +40,7 @@ app.post('/weather', function(req, res, next) {
     url: urlApiResponse
   };
 
-  function callback(error, responsem, body) {
+  function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayLoad = {
