@@ -31,31 +31,32 @@ app.post('/hello', function(req, res, next) {
 });
 
 app.post('/weather', function(req, res, next) {
-            const userName = req.body.user_name;
-            const messageText = req.body.text;
-            const getCity = messageText.split('weather ');
-            const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+  const userName = req.body.user_name;
+  const messageText = req.body.text;
+  const getCity = messageText.split('weather ');
+  const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
 
-            http.get(urlApiResponse, (res) => {
-                let body = '';
-                const botPayLoad = {
-                    text: `Hello ${userName}, here is the weather for ${getCity}:
+  http.get(urlApiResponse, (res) => {
+    let body = '';
+    const botPayLoad = {
+      text: `Hello ${userName}, here is the weather for ${getCity}:
             \nTEMP - ${body.main.temp}
             \nWEATHER - ${body.weather.description}
             \nWIND SPEED - ${body.wind.speed}`
-                }
+          }
 
-                res.setEncoding('utf8');
-                res.on('data', (chunk) {
-                    body += chunk;
-                });
+          res.setEncoding('utf8');
+          res.on('data', (chunk) {
+            body += chunk;
+          });
 
-                res.on('end', () => {
-                    if (userName !== 'slackbot') {
-                        return res.status(200).json(botPayLoad)
-                    } else {
-                        return res.status(200).end();
-                    }
-                })
-            });
-        }
+          res.on('end', () => {
+            if (userName !== 'slackbot') {
+              return res.status(200).json(botPayLoad)
+            } else {
+              return res.status(200).end();
+            }
+          })
+          
+    });
+}
