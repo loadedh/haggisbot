@@ -38,25 +38,26 @@ app.post('/weather', function(req, res, next) {
 
   http.get(urlApiResponse, (res) => {
     let body = '';
-    const botPayLoad = {
-      text: `Hello ${userName}, here is the weather for ${getCity}:
-            \nTEMP - ${body.main.temp}
-            \nWEATHER - ${body.weather.description}
-            \nWIND SPEED - ${body.wind.speed}`
-          }
-
           res.setEncoding('utf8');
           res.on('data', (chunk) {
             body += chunk;
           });
 
           res.on('end', () => {
+            const data = JSON.parse(body);
+            const botPayLoad = {
+              text: `Hello ${userName}, here is the weather for ${getCity}:
+                    \nTEMP - ${body.main.temp}
+                    \nWEATHER - ${body.weather.description}
+                    \nWIND SPEED - ${body.wind.speed}`
+                  }
+                  
             if (userName !== 'slackbot') {
               return res.status(200).json(botPayLoad)
             } else {
               return res.status(200).end();
             }
           })
-          
+
     });
 }
