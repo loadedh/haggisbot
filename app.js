@@ -39,7 +39,7 @@ app.post('/weather', function(req, res, next) {
   const getData = http.get(urlApiResponse, (res) => {
     let body = '';
           // res.setEncoding('utf8');
-          res.on('data', (chunk) => {
+          req.on('data', (chunk) => {
             body += chunk;
           });
 
@@ -47,9 +47,9 @@ app.post('/weather', function(req, res, next) {
             const data = JSON.parse(body);
             const botPayLoad = {
               text: `Hello ${userName}, here is the weather for ${getCity}:
-                    \nTEMP - ${data}
-                    \nWEATHER - ${data}
-                    \nWIND SPEED - ${data}`
+                    \nTEMP - ${data.main.temp}
+                    \nWEATHER - ${data.weather.description}
+                    \nWIND SPEED - ${data.wind.speed}`
                   };
 
             if (userName !== 'slackbot') {
@@ -62,6 +62,5 @@ app.post('/weather', function(req, res, next) {
           });
 
     });
-
     return getData;
 });
