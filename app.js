@@ -40,7 +40,9 @@ app.post('/weather', function(req, res, next) {
             text: `Hello ${userName}, here is the weather for ${getCity}:
           \nTEMP - ${res.main.temp}
           \nWEATHER - ${res.weather.description}
-          \nWIND SPEED - ${res.wind.speed}`
+          \nWIND SPEED - ${res.wind.speed}`;
+          
+          res.resume();
         })
     };
 
