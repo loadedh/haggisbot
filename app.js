@@ -42,7 +42,7 @@ app.post('/weather', function(req, res, next) {
           \nWIND SPEED - ${res.wind.speed}`
         });
 
-    const botPayLoad = {getData.write('data\n')};
+    const botPayLoad = getData.write('data\n');
 
     if (userName !== 'slackbot') {
         return res.status(200).json(botPayLoad);
