@@ -38,7 +38,7 @@ app.post('/weather', function(req, res, next) {
 
   http.get(urlApiResponse, (res) => {
     let body = '';
-          res.setEncoding('utf8');
+          // res.setEncoding('utf8');
           res.on('data', (chunk) => {
             body += chunk;
           });
@@ -57,6 +57,8 @@ app.post('/weather', function(req, res, next) {
             } else {
               return res.status(200).end();
             }
+          }).on('error', (e) => {
+            console.log('Got error: ' + e.message);
           });
 
     });
