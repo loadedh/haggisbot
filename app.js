@@ -51,7 +51,7 @@ console.log('Im calling the weather');
       const botPayLoad = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
               \nTEMP - ${info.main.temp}
-              \nWEATHER - ${info.weather.description}
+              \nWEATHER - ${info.weather[0]["description"]}
               \nWIND SPEED - ${info.wind.speed}`
             };
 
