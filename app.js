@@ -37,12 +37,23 @@ console.log('Im calling the weather');
 
   const userName = req.body.user_name;
   const messageText = req.body.text;
-  const getCity = messageText.split('weather ');
-  const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units=metric`;
+  const getUserDefinedData = messageText.split(' ');
+  let getUnits = '';
+  const getCity = getUserDefinedData[1];
 
+  if (getUserDefinedData.length === 2) {
+      return getUnits === 'metrics';
+  } else if (getUserDefinedData[2] === 'celsius') {
+    return getUnits === 'metric';
+  } else {
+    return getUnits === 'imperial';
+  }
+
+  const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units={getUnits}`;
   const options = {
     uri: urlApiResponse
   };
+
   function callback(error, response, body) {
     console.log(error, response, body);
 
