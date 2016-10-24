@@ -38,28 +38,27 @@ console.log('Im calling the weather');
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const getUserDefinedData = messageText.split(' ');
-  let getUnits = '';
+  const getUnits = 'metric';
   const getCity = getUserDefinedData[1];
 
-  if (getUserDefinedData.length === 2) {
-      return getUnits === 'metrics';
-  } else if (getUserDefinedData[2] === 'celsius') {
-    return getUnits === 'metric';
-  } else {
-    return getUnits === 'imperial';
-  }
+  // if (getUserDefinedData.length === 2) {
+  //   return getUnits === 'metrics';
+  // } else if (getUserDefinedData[2] === 'celsius') {
+  //   return getUnits === 'metric';
+  // } else {
+  //   return getUnits === 'imperial';
+  // }
 
-  const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity[1]}&APPID=fc2a5047efd117936135c68fe985dcf6&units={getUnits}`;
+  const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${getUnits}`;
   const options = {
     uri: urlApiResponse
   };
 
   function callback(error, response, body) {
-    console.log(error, response, body);
 
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
-      const botPayLoad = {
+      botPayLoad: {
         text: `Hello ${userName}, here is the weather for ${getCity}:
               \nTEMP - ${info.main.temp}
               \nWEATHER - ${info.weather[0]["description"]}
@@ -69,5 +68,5 @@ console.log('Im calling the weather');
             return botPayLoad;
         }
     }
-  return res.status(200).json(request(options, callback));
+  return res.status(200).json(request(options, callback.botPayLoad));
 });
