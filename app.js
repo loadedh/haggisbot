@@ -15,10 +15,11 @@ app.get('/', function(reg, res) {
 });
 
 app.listen(port, function() {
-    console.log(`We are listening to the port: ${port}`);
+    console.log(`We are listening to the port: ${port}!!!!!!!`);
 });
 
 app.post('/hello', function(req, res, next) {
+  console.log('HEY')
     const userName = req.body.user_name;
     const botPayLoad = {
         text: `Hello ${userName}, this is the Haggis slack channel. ^_^ Welcome and have fun! ^_^`
@@ -32,6 +33,8 @@ app.post('/hello', function(req, res, next) {
 });
 
 app.post('/weather', function(req, res, next) {
+console.log('Im calling the weather');
+
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const getCity = messageText.split('weather ');
@@ -41,6 +44,8 @@ app.post('/weather', function(req, res, next) {
     uri: urlApiResponse
   };
   function callback(error, response, body) {
+    console.log(error, response, body);
+
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayLoad = {
@@ -49,6 +54,8 @@ app.post('/weather', function(req, res, next) {
               \nWEATHER - ${info.weather.description}
               \nWIND SPEED - ${info.wind.speed}`
             };
+
+            return botPayLoad;
         }
     }
   return res.status(200).json(request(options, callback));
