@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', function(reg, res) {
     res.status(200).send('App is live!!');
-    process.stdout.write('Does this thing work? ');
+    process.stdout.write('Starting application! ');
 });
 
 app.listen(port, function() {
@@ -68,7 +68,7 @@ app.post('/weather', function(req, res, next) {
           the units of measurement are optional, if not specified it will be
           defaulted to metric/celsius. `
       }
-      return res.status(409).json(helpMessage);
+      return res.status(200).json(helpMessage);
     } else if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayload = {
