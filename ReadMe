@@ -7,6 +7,6 @@ As of 19/10/16 this bot has two functions:
 2. Second is to tell the user the weather for a city of there choice
 -To use type 'weather yourcity units' in a chatroom that haggisbot is looking at.
 yourcity should be replaced with the city you want the weather for
-units is optional and can be replaced with metrics or imperial (defaults to metric)
+units is optional and can be replaced with celsius or fahrenheit (defaults to celsius)
 
   - Kieron Hagg
