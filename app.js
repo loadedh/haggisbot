@@ -63,11 +63,10 @@ app.post('/weather', function(req, res, next) {
 
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
-      iconUrl = `http://openweathermap.org/img/w/${info.weather[0]['icon']}.png`
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
                Temperature: ${info.main.temp}
-               Weather conditions: ${info.weather[0]['description']} ${'<img src=iconUrl/>'}
+               Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']:}
                Wind speed: ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
