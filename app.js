@@ -38,11 +38,11 @@ console.log('Im calling the weather');
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const getUserDefinedData = messageText.split(' ');
-  let getUnits = 'metric';
+  let getUnits = '';
   const getCity = getUserDefinedData[1];
 
   if (getUserDefinedData.length === 2) {
-    getUnits = 'metrics';
+    getUnits = 'metric';
   } else if (getUserDefinedData[2] === 'celsius') {
     getUnits = 'metric';
   } else {
@@ -60,9 +60,9 @@ console.log('Im calling the weather');
       const info = JSON.parse(body);
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
-              \nTEMP - ${info.main.temp}
-              \nWEATHER - ${info.weather[0]["description"]}
-              \nWIND SPEED - ${info.wind.speed}`
+               TEMP - ${info.main.temp}
+               WEATHER - ${info.weather[0]["description"]}
+               WIND SPEED - ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
     }
