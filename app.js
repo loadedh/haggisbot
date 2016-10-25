@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', function(reg, res) {
     res.status(200).send('App is live!!');
+    process.stdout.write('Does this thing work?');
 });
 
 app.listen(port, function() {
