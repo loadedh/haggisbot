@@ -73,7 +73,7 @@ app.post('/weather', function(req, res, next) {
     } else if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayload = {
-        text: `Hello ${userName}, here is the weather for ${userDefinedCity} :flag-${info.sys.country}: :
+        text: `Hello ${userName}, here is the weather for ${info.name} :flag-${info.sys.country}: :
                Temperature: ${info.main.temp}${imperialOrMetric}
                Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']}:
                Wind speed: ${info.wind.speed}mph`
