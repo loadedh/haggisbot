@@ -41,18 +41,6 @@ app.post('/weather', function(req, res, next) {
   const splitUsersMessage = messageText.split(' ');
   const userDefinedCity = splitUsersMessage[1];
 
-  if (splitUsersMessage.length === 1) {
-    return function callback (error, response, body) {
-        const helpMessage = {
-          text: `Help: This is the weather bot. To use this bot type
-            'weather (a city) (units of measurement celsius or fahrenheit)'
-            the units of measurement are optional, if not specified it will be
-            defaulted to metric/celsius. `
-        } 
-    }
-    return res.status(409).json(helpMessage);
-  }
-
   UnitsOfMeasurement = '';
   imperialOrMetric = '';
 
@@ -81,6 +69,14 @@ app.post('/weather', function(req, res, next) {
                Wind speed: ${info.wind.speed}mph`
       };
       return res.status(200).json(botPayload);
+    } else if (splitUsersMessage.length === 1) {
+      const helpMessage = {
+        text: `Help: This is the weather bot. To use this bot type
+          'weather (a city) (units of measurement celsius or fahrenheit)'
+          the units of measurement are optional, if not specified it will be
+          defaulted to metric/celsius. `
+      }
+      return res.status(409).json(helpMessage);
     } else {
       return process.stdout.write(`${res.status(409)} There was an error in the request and could not be processed`);
     }
