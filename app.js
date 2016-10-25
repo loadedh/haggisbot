@@ -41,8 +41,8 @@ app.post('/weather', function(req, res, next) {
   const splitUsersMessage = messageText.split(' ');
   const userDefinedCity = splitUsersMessage[1];
 
-  UnitsOfMeasurement = '';
-  imperialOrMetric = '';
+  let unitsOfMeasurement = '';
+  let imperialOrMetric = '';
 
   if (splitUsersMessage[2] === 'fahrenheit') {
     UnitsOfMeasurement = 'imperial';
