@@ -38,16 +38,16 @@ console.log('Im calling the weather');
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const getUserDefinedData = messageText.split(' ');
-  const getUnits = 'metric';
+  let getUnits = 'metric';
   const getCity = getUserDefinedData[1];
 
-  // if (getUserDefinedData.length === 2) {
-  //   return getUnits === 'metrics';
-  // } else if (getUserDefinedData[2] === 'celsius') {
-  //   return getUnits === 'metric';
-  // } else {
-  //   return getUnits === 'imperial';
-  // }
+  if (getUserDefinedData.length === 2) {
+    getUnits = 'metrics';
+  } else if (getUserDefinedData[2] === 'celsius') {
+    getUnits = 'metric';
+  } else {
+    getUnits = 'imperial';
+  }
 
   const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${getUnits}`;
   const options = {
@@ -58,15 +58,15 @@ console.log('Im calling the weather');
 
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
-      botPayLoad: {
+      const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
               \nTEMP - ${info.main.temp}
               \nWEATHER - ${info.weather[0]["description"]}
               \nWIND SPEED - ${info.wind.speed}`
-            };
-
-            return botPayLoad;
-        }
+      };
+      return res.status(200).json(botPayload);
     }
-  return res.status(200).json(request(options, callback.botPayLoad));
+  }
+
+  request(options, callback)
 });
