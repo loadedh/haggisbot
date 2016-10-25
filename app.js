@@ -38,19 +38,17 @@ app.post('/weather', function(req, res, next) {
 
   const userName = req.body.user_name;
   const messageText = req.body.text;
-  const getUserDefinedData = messageText.split(' ');
-  const getCity = getUserDefinedData[1];
+  const splitUsersMessage = messageText.split(' ');
+  const userDefinedCity = getUserDefinedData[1];
+
+  if (userDefinedCity == undefined) {
+    return res.status(409);
+  }
+
   UnitsOfMeasurement = '';
   imperialOrMetric = '';
 
-  if (getUserDefinedData.length === 2) {
-    UnitsOfMeasurement = 'metric';
-    imperialOrMetric = '°C';
-    console.log('Units defaulted to metric/celsius')
-  } else if (getUserDefinedData[2] === 'celsius') {
-    UnitsOfMeasurement = 'metric';
-    imperialOrMetric = '°C';
-  } else if (getUserDefinedData[2] === 'fahrenheit') {
+  if (splitUsersMessage[2] === 'fahrenheit') {
     UnitsOfMeasurement = 'imperial';
     imperialOrMetric = '°F';
   } else {
@@ -59,7 +57,7 @@ app.post('/weather', function(req, res, next) {
     process.stdout.write('Units entered did not meet the criteria. Defaulting to metric');
   }
 
-  const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${getCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${UnitsOfMeasurement}`;
+  const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${userDefinedCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${UnitsOfMeasurement}`;
   const options = {
     uri: configuredApiUrl
   };
@@ -69,7 +67,7 @@ app.post('/weather', function(req, res, next) {
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayload = {
-        text: `Hello ${userName}, here is the weather for ${getCity}:
+        text: `Hello ${userName}, here is the weather for ${userDefinedCity}:
                Temperature: ${info.main.temp}${imperialOrMetric}
                Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']}:
                Wind speed: ${info.wind.speed}mph`
