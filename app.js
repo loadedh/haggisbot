@@ -80,7 +80,7 @@ app.post('/weather', function(req, res, next) {
       };
       return res.status(200).json(botPayload);
     } else {
-      return process.stdout.write(`${res.status(409)} There was an error in the request and could not be processed`);
+      return 'There was an error in the request and could not be processed, try again with valid inputs';
     }
   }
 
