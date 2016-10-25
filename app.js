@@ -49,7 +49,7 @@ app.post('/weather', function(req, res, next) {
     UnitsOfMeasurement = 'imperial';
   } else {
     UnitsOfMeasurement = 'metric';
-    console.log('Units entered did not meet the criteria. Defaulting to metric');
+    process.stdout.write('Units entered did not meet the criteria. Defaulting to metric');
   }
 
   const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${getCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${UnitsOfMeasurement}`;
@@ -69,7 +69,7 @@ app.post('/weather', function(req, res, next) {
       };
       return res.status(200).json(botPayload);
     } else {
-      throw 'Error: line 72';
+      return process.stdout.write(`${res.status(409)} There was an error in the request and could not be processed`);
     }
   }
 
