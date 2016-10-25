@@ -39,7 +39,7 @@ app.post('/weather', function(req, res, next) {
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const splitUsersMessage = messageText.split(' ');
-  const userDefinedCity = getUserDefinedData[1];
+  const userDefinedCity = splitUsersMessage[1];
 
   if (userDefinedCity == undefined) {
     return res.status(409);
