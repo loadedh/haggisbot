@@ -66,7 +66,7 @@ app.post('/weather', function(req, res, next) {
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
                TEMP - ${info.main.temp}
-               WEATHER - ${info.weather[0]["description"]}
+               WEATHER - ${info.weather[0]["description"]} ${info.weather[0]['icon']}
                WIND SPEED - ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
