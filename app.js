@@ -50,7 +50,7 @@ app.post('/weather', function(req, res, next) {
   } else {
     UnitsOfMeasurement = 'metric';
     imperialOrMetric = '°C';
-    process.stdout.write('Units entered did not meet the criteria. Defaulting to metric');
+    process.stdout.write('Units entered did not meet the criteria. Defaulting to metric ');
   }
 
   const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${userDefinedCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${UnitsOfMeasurement}`;
@@ -66,7 +66,8 @@ app.post('/weather', function(req, res, next) {
         text: `Help: This is the weather bot. To use this bot type
           'weather (a city) (units of measurement celsius or fahrenheit)'
           the units of measurement are optional, if not specified it will be
-          defaulted to metric/celsius. `
+          defaulted to metric/celsius. :+1:
+          Example: weather london celsius `
       }
       return res.status(200).json(helpMessage);
     } else if (!error && response.statusCode == 200) {
