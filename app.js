@@ -61,7 +61,7 @@ app.post('/weather', function(req, res, next) {
   function callback(error, response, body) {
 
 
-    if (splitUsersMessage.length === 1) {
+    if (splitUsersMessage.length === 1 && !error) {
       const helpMessage = {
         text: `Help: Hi I'm Dan. To use my features type
           'weather (a city) (units of measurement celsius or fahrenheit)'
@@ -73,7 +73,7 @@ app.post('/weather', function(req, res, next) {
     } else if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayload = {
-        text: `Hello ${userName}, here is the weather for ${userDefinedCity}:
+        text: `Hello ${userName}, here is the weather for ${userDefinedCity} :flag-${info.sys.country}: :
                Temperature: ${info.main.temp}${imperialOrMetric}
                Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']}:
                Wind speed: ${info.wind.speed}mph`
