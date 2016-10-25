@@ -60,7 +60,16 @@ app.post('/weather', function(req, res, next) {
 
   function callback(error, response, body) {
 
-    if (!error && response.statusCode == 200) {
+
+    if (splitUsersMessage.length === 1) {
+      const helpMessage = {
+        text: `Help: This is the weather bot. To use this bot type
+          'weather (a city) (units of measurement celsius or fahrenheit)'
+          the units of measurement are optional, if not specified it will be
+          defaulted to metric/celsius. `
+      }
+      return res.status(409).json(helpMessage);
+    } else if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${userDefinedCity}:
@@ -69,14 +78,6 @@ app.post('/weather', function(req, res, next) {
                Wind speed: ${info.wind.speed}mph`
       };
       return res.status(200).json(botPayload);
-    } else if (splitUsersMessage.length === 1) {
-      const helpMessage = {
-        text: `Help: This is the weather bot. To use this bot type
-          'weather (a city) (units of measurement celsius or fahrenheit)'
-          the units of measurement are optional, if not specified it will be
-          defaulted to metric/celsius. `
-      }
-      return res.status(409).json(helpMessage);
     } else {
       return process.stdout.write(`${res.status(409)} There was an error in the request and could not be processed`);
     }
