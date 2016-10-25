@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const http = require('http');
 const request = require('request');
 
 const app = express();
@@ -33,13 +32,13 @@ app.post('/hello', function(req, res, next) {
 });
 
 app.post('/weather', function(req, res, next) {
-console.log('Im calling the weather');
+// console.log('Im calling the weather');
 
   const userName = req.body.user_name;
   const messageText = req.body.text;
   const getUserDefinedData = messageText.split(' ');
-  let getUnits = '';
   const getCity = getUserDefinedData[1];
+  let getUnits = '';
 
   if (getUserDefinedData.length === 2) {
     getUnits = 'metric';
