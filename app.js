@@ -60,7 +60,7 @@ app.post('/weather', function(req, res, next) {
   };
 
   function callback(error, response, body) {
-    let iconUrl = 'http://openweathermap.org/img/w/10d.png'
+    iconUrl = 'http://openweathermap.org/img/w/10d.png'
 
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
