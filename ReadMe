@@ -5,8 +5,8 @@ As of 19/10/16 this bot has two functions:
 - To use type 'hello haggisbot' in a chatroom that haggisbot is looking at.
 
 2. Second is to tell the user the weather for a city of there choice
--To use type 'weather yourcity' in a chatroom that haggisbot is looking at.
-
-Yo this shit don't fucking work fam!
+-To use type 'weather yourcity units' in a chatroom that haggisbot is looking at.
+yourcity should be replaced with the city you want the weather for
+units is optional and can be replaced with metrics or imperial (defaults to metric)
 
   - Kieron Hagg
