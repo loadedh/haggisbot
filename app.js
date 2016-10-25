@@ -60,15 +60,15 @@ app.post('/weather', function(req, res, next) {
   };
 
   function callback(error, response, body) {
-    iconUrl = 'http://openweathermap.org/img/w/10d.png'
 
     if (!error && response.statusCode == 200) {
       const info = JSON.parse(body);
+      iconUrl = `http://openweathermap.org/img/w/${info.weather[0]['icon']}.png`
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
-               TEMP - ${info.main.temp}
-               WEATHER - ${info.weather[0]["description"]} ${iconUrl}
-               WIND SPEED - ${info.wind.speed}`
+               TEMP: ${info.main.temp}
+               WEATHER: ${info.weather[0]['description']} ${iconUrl}
+               WIND SPEED: ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
     } else {
