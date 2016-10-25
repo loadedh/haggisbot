@@ -40,7 +40,7 @@ app.post('/weather', function(req, res, next) {
   const messageText = req.body.text;
   const getUserDefinedData = messageText.split(' ');
   const getCity = getUserDefinedData[1];
-  let UnitsOfMeasurement = '';
+  UnitsOfMeasurement = '';
 
   if (getUserDefinedData.length === 2) {
     UnitsOfMeasurement = 'metric';
