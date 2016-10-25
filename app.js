@@ -41,13 +41,16 @@ app.post('/weather', function(req, res, next) {
   const splitUsersMessage = messageText.split(' ');
   const userDefinedCity = splitUsersMessage[1];
 
-  if (userDefinedCity == undefined) {
-    return res.status(409).json({
-      text: `Help: This is the weather bot. To use this bot type
-        'weather (a city) (units of measurement celsius or fahrenheit)'
-        the units of measurement are optional, if not specified it will be
-        defaulted to metric/celsius. `
-    });
+  if (splitUsersMessage.length === 1) {
+    return function callback (error, response, body) {
+        const helpMessage = {
+          text: `Help: This is the weather bot. To use this bot type
+            'weather (a city) (units of measurement celsius or fahrenheit)'
+            the units of measurement are optional, if not specified it will be
+            defaulted to metric/celsius. `
+        } 
+    }
+    return res.status(409).json(helpMessage);
   }
 
   UnitsOfMeasurement = '';
