@@ -23,7 +23,7 @@ app.post('/hello', function(req, res, next) {
   console.log('HEY')
     const userName = req.body.user_name;
     const botPayLoad = {
-        text: `Hello ${userName}, this is the Haggis slack channel. ^_^ Welcome and have fun! ^_^`
+        text: `Hello ${userName}, this is the Haggis slack channel. ^n^ Welcome and have fun! ^n^`
     };
 
     if (userName !== 'slackbot') {
@@ -41,16 +41,21 @@ app.post('/weather', function(req, res, next) {
   const getUserDefinedData = messageText.split(' ');
   const getCity = getUserDefinedData[1];
   UnitsOfMeasurement = '';
+  imperialOrMetric = '';
 
   if (getUserDefinedData.length === 2) {
     UnitsOfMeasurement = 'metric';
+    imperialOrMetric = '°C';
     console.log('Units defaulted to metric/celsius')
   } else if (getUserDefinedData[2] === 'celsius') {
     UnitsOfMeasurement = 'metric';
+    imperialOrMetric = '°C';
   } else if (getUserDefinedData[2] === 'fahrenheit') {
     UnitsOfMeasurement = 'imperial';
+    imperialOrMetric = '°F';
   } else {
     UnitsOfMeasurement = 'metric';
+    imperialOrMetric = '°C';
     process.stdout.write('Units entered did not meet the criteria. Defaulting to metric');
   }
 
@@ -65,9 +70,9 @@ app.post('/weather', function(req, res, next) {
       const info = JSON.parse(body);
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
-               Temperature: ${info.main.temp}
+               Temperature: ${info.main.temp}${imperialOrMetric}
                Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']}:
-               Wind speed: ${info.wind.speed}`
+               Wind speed: ${info.wind.speed}mph`
       };
       return res.status(200).json(botPayload);
     } else {
