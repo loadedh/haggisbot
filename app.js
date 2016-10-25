@@ -68,6 +68,8 @@ app.post('/weather', function(req, res, next) {
                WIND SPEED - ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
+    } else if (error) {
+      throw 'Error 72';
     }
   }
 
