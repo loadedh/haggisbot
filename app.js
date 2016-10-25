@@ -42,7 +42,12 @@ app.post('/weather', function(req, res, next) {
   const userDefinedCity = splitUsersMessage[1];
 
   if (userDefinedCity == undefined) {
-    return res.status(409);
+    return res.status(409).json({
+      text: `Help: This is the weather bot. To use this bot type
+        'weather (a city) (units of measurement celsius or fahrenheit)'
+        the units of measurement are optional, if not specified it will be
+        defaulted to metric/celsius. `
+    });
   }
 
   UnitsOfMeasurement = '';
