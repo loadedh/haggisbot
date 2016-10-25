@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', function(reg, res) {
     res.status(200).send('App is live!!');
-    process.stdout.write('Does this thing work?');
+    process.stdout.write('Does this thing work? ');
 });
 
 app.listen(port, function() {
@@ -66,7 +66,7 @@ app.post('/weather', function(req, res, next) {
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${getCity}:
                Temperature: ${info.main.temp}
-               Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']:}
+               Weather conditions: ${info.weather[0]['description']} :${info.weather[0]['icon']}:
                Wind speed: ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
