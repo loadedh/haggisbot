@@ -38,19 +38,23 @@ app.post('/weather', function(req, res, next) {
   const messageText = req.body.text;
   const getUserDefinedData = messageText.split(' ');
   const getCity = getUserDefinedData[1];
-  let getUnits = '';
+  let UnitsOfMeasurement = '';
 
   if (getUserDefinedData.length === 2) {
-    getUnits = 'metric';
+    UnitsOfMeasurement = 'metric';
+    console.log('Units defaulted to metric/celsius')
   } else if (getUserDefinedData[2] === 'celsius') {
-    getUnits = 'metric';
+    UnitsOfMeasurement = 'metric';
+  } else if (getUserDefinedData[2] === 'fahreheit') {
+    UnitsOfMeasurement = 'imperial';
   } else {
-    getUnits = 'imperial';
+    UnitsOfMeasurement = 'metric';
+    console.log('Units entered did not meet the criteria. Defaulting to metric');
   }
 
-  const urlApiResponse = `http://api.openweathermap.org/data/2.5/weather?q=${getCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${getUnits}`;
+  const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${getCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${UnitsOfMeasurement}`;
   const options = {
-    uri: urlApiResponse
+    uri: configuredApiUrl
   };
 
   function callback(error, response, body) {
