@@ -63,7 +63,7 @@ app.post('/weather', function(req, res, next) {
 
     if (splitUsersMessage.length === 1) {
       const helpMessage = {
-        text: `Help: This is the weather bot. To use this bot type
+        text: `Help: Hi I'm Dan. To use my features type
           'weather (a city) (units of measurement celsius or fahrenheit)'
           the units of measurement are optional, if not specified it will be
           defaulted to metric/celsius. :+1:
