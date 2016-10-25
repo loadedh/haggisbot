@@ -45,7 +45,7 @@ app.post('/weather', function(req, res, next) {
     console.log('Units defaulted to metric/celsius')
   } else if (getUserDefinedData[2] === 'celsius') {
     UnitsOfMeasurement = 'metric';
-  } else if (getUserDefinedData[2] === 'fahreheit') {
+  } else if (getUserDefinedData[2] === 'fahrenheit') {
     UnitsOfMeasurement = 'imperial';
   } else {
     UnitsOfMeasurement = 'metric';
@@ -68,8 +68,8 @@ app.post('/weather', function(req, res, next) {
                WIND SPEED - ${info.wind.speed}`
       };
       return res.status(200).json(botPayload);
-    } else if (error) {
-      throw 'Error 72';
+    } else {
+      throw 'Error: line 72';
     }
   }
 
