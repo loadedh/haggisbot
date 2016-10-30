@@ -36,7 +36,7 @@ app.post('/hello', function(req, res, next) {
 });
 
 app.post('/weather', function(req, res, next) {
-// console.log('Im calling the weather');
+  console.log('Im calling the weather!!!!!!!!!!!!!');
 
   const userName = req.body.user_name;
   const messageText = req.body.text;
@@ -47,23 +47,27 @@ app.post('/weather', function(req, res, next) {
   let imperialOrMetric = '';
 
   if (splitUsersMessage[2] === 'fahrenheit') {
-    UnitsOfMeasurement = 'imperial';
+    unitsOfMeasurement = 'imperial';
     imperialOrMetric = '°F';
   } else {
-    UnitsOfMeasurement = 'metric';
+    unitsOfMeasurement = 'metric';
     imperialOrMetric = '°C';
-    process.stdout.write('Units entered did not meet the criteria. Defaulting to metric ');
+    console.log('Units entered did not meet the criteria. Defaulting to metric ');
   }
 
-  const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${userDefinedCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${UnitsOfMeasurement}`;
+  const configuredApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${userDefinedCity}&APPID=fc2a5047efd117936135c68fe985dcf6&units=${unitsOfMeasurement}`;
   const options = {
     uri: configuredApiUrl
   };
 
   function callback(error, response, body) {
+   if(error) {
+     return res.status(200).json({
+       text: 'There was an error in the request and could not be processed, try again with valid inputs'
+     });
+   }
 
-
-    if (splitUsersMessage.length === 1 && !error) {
+    if (splitUsersMessage.length === 1) {
       const helpMessage = {
         text: `Help: Hi I'm Dan. To use my features type
           'weather (a city) (units of measurement celsius or fahrenheit)'
@@ -72,7 +76,9 @@ app.post('/weather', function(req, res, next) {
           Example: weather london celsius `
       }
       return res.status(200).json(helpMessage);
-    } else if (!error && response.statusCode == 200) {
+    }
+
+    if (response.statusCode == 200) {
       const info = JSON.parse(body);
       const botPayload = {
         text: `Hello ${userName}, here is the weather for ${info.name} :flag-${info.sys.country}: :
@@ -81,11 +87,9 @@ app.post('/weather', function(req, res, next) {
                Wind speed: ${info.wind.speed}mph`
       };
       return res.status(200).json(botPayload);
-    } else {
-      return res.status(200).json({
-        text: 'There was an error in the request and could not be processed, try again with valid inputs'
-      })
     }
+
+    // what am I going to do here?
   }
 
   request(options, callback)
