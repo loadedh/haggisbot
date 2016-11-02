@@ -9,4 +9,7 @@ As of 19/10/16 this bot has two functions:
 yourcity should be replaced with the city you want the weather for
 units is optional and can be replaced with celsius or fahrenheit (defaults to celsius)
 
+This bot is currently being hosted via Heroku and is linked to slack using an outgoing webhook.
+
+
   - Kieron Hagg
